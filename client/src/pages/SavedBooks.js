@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { useMutation, useQuery } from '@apollo/client';
 import {
   Container,
   Card,
@@ -6,8 +9,6 @@ import {
   Row,
   Col
 } from 'react-bootstrap';
-
-import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 
@@ -25,7 +26,7 @@ const SavedBooks = () => {
   const [removeBook] = useMutation(REMOVE_BOOK); // , { error }
 
   // set up query with error handling
-  const [getMe] = useQuery(GET_ME); // , { error }
+  const [getMe, {error}] = useQuery(GET_ME); // , { error }
 
 
   useEffect(() => {
