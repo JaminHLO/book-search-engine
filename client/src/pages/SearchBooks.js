@@ -21,7 +21,6 @@ const searchGoogleBooks = (query) => {
 
 
 const SearchBooks = () => {
-
   // console.log("inside SearchBooks");
 
   // create state for holding returned google api data
@@ -31,7 +30,7 @@ const SearchBooks = () => {
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
   // set up mutation with error handling
-  const { saveBook } = useMutation(SAVE_BOOK); // , { error }
+  const [ saveBook ] = useMutation(SAVE_BOOK); // , { error }
 
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
@@ -65,7 +64,7 @@ const SearchBooks = () => {
         image: book.volumeInfo.imageLinks?.thumbnail || '',
       }));
 
-      console.log("bookData is:", bookData);
+      // console.log("bookData is:", bookData);
 
       setSearchedBooks(bookData);
       setSearchInput('');
@@ -76,6 +75,7 @@ const SearchBooks = () => {
 
   // create function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {
+    // console.log("selected bookId:", bookId);
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
@@ -87,7 +87,17 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await saveBook(bookToSave, token);
+      console.log("bookToSave:", bookToSave)
+      console.log( {...bookToSave} )
+      const response = await saveBook( 
+        bookToSave.bookId,
+        bookToSave.authors,
+        bookToSave.description,
+        bookToSave.title,
+        bookToSave.image,
+        bookToSave.link
+        
+        ); // , token
 
       if (!response.ok) {
         throw new Error('something went wrong!');
@@ -100,8 +110,8 @@ const SearchBooks = () => {
     }
   };
 
-  console.log("got to return statement");
-  console.log()
+  // console.log("got to return statement");
+  // console.log(searchedBooks)
 
   return (
     <>

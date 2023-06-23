@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+// import { useParams } from 'react-router-dom';
 
 import { useMutation, useQuery } from '@apollo/client';
 import {
@@ -26,36 +26,60 @@ const SavedBooks = () => {
   const [removeBook] = useMutation(REMOVE_BOOK); // , { error }
 
   // set up query with error handling
-  const [getMe, {error}] = useQuery(GET_ME); // , { error }
+  const [ getMe ] = useQuery(GET_ME); // , { error }
 
-
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-        if (!token) {
-          return false;
-        }
-
-        const response = await getMe(token);
-        //   {
-        //   variables: {token}
-        // });
-
-        if (!response.ok) {
-          throw new Error('something went wrong!');
-        }
-
-        const user = await response.json();
-        setUserData(user);
-      } catch (err) {
-        console.error(err);
+  const useGetMe = async () => {
+    try {
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
+      if (!token) {
+        return false;
       }
-    };
+    
+    const response = await getMe(token);
+    console.log("user is:", response);
+    if (!response.ok) {
+      throw new Error('something went wrong!');
+    }
+    const user = await response.json();
+        setUserData(user);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
-    getUserData();
-  }, [userDataLength]);
+  useGetMe();
+  
+  // setUserData( 
+  //   getMe()
+  // );
+
+  // useEffect(() => {
+  //   const getUserData = async () => {
+  //     try {
+  //       const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+  //       if (!token) {
+  //         return false;
+  //       }
+
+  //       const response = await getMe(token);
+  //       //   {
+  //       //   variables: {token}
+  //       // });
+
+  //       if (!response.ok) {
+  //         throw new Error('something went wrong!');
+  //       }
+
+  //       const user = await response.json();
+  //       setUserData(user);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+
+  //   getUserData();
+  // }, [userDataLength]);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -64,7 +88,6 @@ const SavedBooks = () => {
     if (!token) {
       return false;
     }
-
 
     try {
       const response = await removeBook({ //

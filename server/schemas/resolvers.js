@@ -29,14 +29,14 @@ const resolvers = {
 
       return { token, user };
     },
-    addUser: async (parent, { username, email, password, savedBooks }) => {
+    addUser: async (parent, { username, email, password }) => {
       const user = await User.create( 
         { username, email, password }
       );
       const token = signToken(user);
       return { token, user };
     },
-    saveBook: async (parent, body, context) => {
+    saveBook: async (parent, { body }, context) => {
       if (context.user) {
         const book = await Book.create( {
           authors: body.authors,
@@ -46,6 +46,8 @@ const resolvers = {
           image: body.image,
           link: body.link,
         });
+
+        // console.log("context.user is:", context.user);
 
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
