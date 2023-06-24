@@ -19,7 +19,7 @@ const LoginForm = () => {
   };
 
   // set up mutation with error handling
-  const [ loginUser, {error} ] = useMutation(LOGIN_USER); // , { error }
+  const [ loginUser ] = useMutation(LOGIN_USER); // , { error }
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -38,15 +38,14 @@ const LoginForm = () => {
 
       console.log("login data is", data);
 
-      // if (!response) {
-      //   throw new Error('something went wrong!');
-      // }
+      if (!data) {
+        throw new Error('something went wrong!');
+      }
 
-      // const { token, user } = await response.json();
       // console.log(user);
       Auth.login(data.login.token);
     } catch (err) {
-      console.log("hi")
+      // console.log("hi")
       console.error(err);
       setShowAlert(true);
     }

@@ -30,7 +30,7 @@ const SearchBooks = () => {
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
   // set up mutation with error handling
-  const [ saveBook ] = useMutation(SAVE_BOOK); // , { error }
+  const [ saveBook, {error} ] = useMutation(SAVE_BOOK); // , { error }
 
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
@@ -78,6 +78,7 @@ const SearchBooks = () => {
     // console.log("selected bookId:", bookId);
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+    // console.log("selected bookToSave:", bookToSave);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -87,19 +88,14 @@ const SearchBooks = () => {
     }
 
     try {
-      console.log("bookToSave:", bookToSave)
-      console.log( {...bookToSave} )
-      const response = await saveBook( 
-        bookToSave.bookId,
-        bookToSave.authors,
-        bookToSave.description,
-        bookToSave.title,
-        bookToSave.image,
-        bookToSave.link
-        
-        ); // , token
+      // console.log("bookToSave:", bookToSave)
+      // console.log( {...bookToSave} )
+      const { data } = await saveBook({
+        variables: {book: {...bookToSave} }, 
+      }); // , token
 
-      if (!response.ok) {
+      // console.log (data);
+      if (!data) {
         throw new Error('something went wrong!');
       }
 
