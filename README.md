@@ -18,9 +18,9 @@ The app is initialized from the command line with:
 >npm run develop
 
 Screenshots of the program in use:
-![initial screen](public/images/gbs-ss-01.jpg)<br> 
-![book search screen](public/images/gbs-ss-02.jpg) <br>
-![saved books screen](public/images/gba-ss-03.jpg)
+![initial screen](https://github.com/JaminHLO/book-search-engine/blob/main/client/public/images/gbs-ss-01.jpg)<br> 
+![book search screen](https://github.com/JaminHLO/book-search-engine/blob/main/client/public/images/gbs-ss-02.jpg) <br>
+![saved books screen](https://github.com/JaminHLO/book-search-engine/blob/main/client/public/images/gba-ss-03.jpg)
 
 ## License
 
