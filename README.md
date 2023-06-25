@@ -18,9 +18,9 @@ The app is initialized from the command line with:
 >npm run develop
 
 Screenshots of the program in use:
-![portfolio initial screen](public/images/rp-ss-01.jpg)<br> 
-![portfolio of projects](public/images/rp-ss-02.jpg) <br>
-![list of skills and resume](public/images/rp-ss-03.jpg)
+![initial screen](public/images/gbs-ss-01.jpg)<br> 
+![book search screen](public/images/gbs-ss-02.jpg) <br>
+![saved books screen](public/images/gba-ss-03.jpg)
 
 ## License
 
