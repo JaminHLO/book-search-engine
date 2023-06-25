@@ -60,17 +60,30 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    removeBook: async (parent, { bookIdToDel }, context) => {
+    removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
         // const book = await Book.findOneAndDelete({
         //   bookId: bookIdToDel,
         // });
 
+        // const curUser = await User.find({_id: context.user._id});
+        // const curSavedBooks = curUser.savedBooks;
+        // curSavedBooks = curSavedBooks.filter(book => book.bookId !== bookId);
+
+
+        // const updatedUser = await User.findOneAndUpdate(
+        //   { '_id': context.user._id },
+        //   { $set: { 'savedBooks': curSavedBooks } },
+        //   { 'new': true }
+        // );
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: { bookIdToDel } } },
+          { $pull: {savedBooks: { bookId } } },
           { new: true }
-        );
+        )
+        // .populate({path: 'savedBooks', select: 'bookId', model: 'User'})
+
+
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
