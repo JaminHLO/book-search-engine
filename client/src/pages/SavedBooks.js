@@ -22,7 +22,7 @@ const SavedBooks = () => {
   // set up query with error handling
   const { loading, data }= useQuery(GET_ME); // , { error }
   const userData = data?.me || {};
-  console.log("userData.savedBooks is:", userData.savedBooks);
+  // console.log("userData.savedBooks is:", userData.savedBooks);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
