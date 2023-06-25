@@ -30,7 +30,7 @@ This Project is covered by the following license: GNU General Public License v3.
 
 I leaned heavily on previous work and assignments, including the mini-project as well as prior activities, especially activity 26 which contained an example of a user account. My purpose was to further familiarize myself with the various ways to implement the required functionality. 
 
-Instruction was provided by Instructor Saurav with assistance from TAs Andreas #1, Andreas #2, Constan, and Morgan. Shout out to AJ and Constans who helped me with numerous issues, particularly GLI bugs. I also used online resources for research and examples such as https://www.apollographql.com/docs/apollo-server/data/context/ and https://stackoverflow.com/ to look for examples to better understand $pull in the context of the findOneAndUpdate function.
+Instruction was provided by Instructor Saurav with assistance from TAs Andreas #1, Andreas #2, Constan, and Morgan. Shout out to AJ and Constans who helped me with numerous issues, particularly GLI bugs. I also used online resources for research and examples such as https://www.apollographql.com/docs/apollo-server/data/context/ and https://stackoverflow.com/ to better understand $pull in the context of the findOneAndUpdate function.
 
 ## Tests
 
