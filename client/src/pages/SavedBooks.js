@@ -1,5 +1,4 @@
-import React from 'react'; // {useState}
-// import { useParams } from 'react-router-dom';
+import React from 'react'; // removed {useState}
 
 import { useMutation, useQuery } from '@apollo/client';
 import {
@@ -12,18 +11,13 @@ import {
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 
-// import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
-  // const [userData, setUserData] = useState({});
-
-  // use this to determine if `useEffect()` hook needs to run again
-  // const userDataLength = Object.keys(userData).length;
 
   // set up mutation with error handling
-  const [removeBook, {error}] = useMutation(REMOVE_BOOK); // , { error }
+  const [ removeBook ] = useMutation(REMOVE_BOOK); // , { error }
 
   // set up query with error handling
   const { loading, data }= useQuery(GET_ME); // , { error }
@@ -39,17 +33,9 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await removeBook({ //
+      await removeBook({ //
         variables: {bookId, token}
       });
-
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
-
-      // const updatedUser = await response.json();
-      // setUserData(updatedUser);
-
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
@@ -64,7 +50,7 @@ const SavedBooks = () => {
 
   return (
     <>
-      <div fluid className='text-light bg-dark p-5'>
+      <div fluid="true" className='text-light bg-dark p-5'>
         <Container>
           <h1>Viewing saved books!</h1>
         </Container>
